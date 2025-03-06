@@ -1,1 +1,1 @@
-# salon-management-
+# SalonManagement
