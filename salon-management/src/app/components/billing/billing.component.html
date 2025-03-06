@@ -1,0 +1,8 @@
+<h2>Billing</h2>
+<label>Employee:</label>
+<select [(ngModel)]="employeeId">
+  <option *ngFor="let emp of employees" [value]="emp.id">{{ emp.name }}</option>
+</select>
+<label>Amount:</label>
+<input type="number" [(ngModel)]="amount" />
+<button (click)="addBill()">Add Bill</button>
