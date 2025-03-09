@@ -1,0 +1,69 @@
+# Node modules (dependencies)
+node_modules/
+npm-debug.log
+yarn-error.log
+package-lock.json
+pnpm-lock.yaml
+
+# IDEs and editors
+.idea/
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# Visual Studio Code settings
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.history/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Angular build files
+/dist/
+/tmp/
+/out-tsc/
+/coverage/
+/.sass-cache/
+
+# Angular testing and reporting
+/coverage/
+/testem.log
+/lcov-report/
+/karma-coverage/
+
+# TypeScript
+*.tsbuildinfo
+
+# Compiled files
+*.js
+*.js.map
+*.d.ts
+
+# Environment files (Add .env if using environment variables)
+.env
+/src/environments/environment.prod.ts
+/src/environments/environment.ts
+
+# Angular cache
+.angular/cache/
+
+# Misc
+/connect.lock
+/libpeerconnection.log
+/typings/
