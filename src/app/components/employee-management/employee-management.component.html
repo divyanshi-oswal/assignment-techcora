@@ -1,0 +1,13 @@
+<h2>Employee Management</h2>
+<table border="1">
+  <tr>
+    <th>Name</th>
+    <th>Monthly Target</th>
+    <th>Achieved</th>
+  </tr>
+  <tr *ngFor="let emp of employees">
+    <td>{{ emp.name }}</td>
+    <td>{{ emp.target | currency }}</td>
+    <td>{{ emp.achieved | currency }}</td>
+  </tr>
+</table>

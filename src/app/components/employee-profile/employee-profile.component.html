@@ -1,0 +1,88 @@
+<div class="container mx-auto p-6">
+    <div class="bg-white rounded-lg shadow-lg p-8">
+      <h2 class="text-3xl font-bold text-gray-800 mb-6">Employee Profile</h2>
+      <form [formGroup]="employeeForm" (ngSubmit)="onSubmit()" class="space-y-6">
+        <div class="flex items-center justify-center mb-6">
+          <div class="relative">
+            <img [src]="previewImage || 'https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&auto=format&fit=crop&w=150&h=150'" 
+                 alt="Profile Picture" 
+                 class="w-32 h-32 rounded-full object-cover border-4 border-gray-200">
+            <label for="profilePicture" class="absolute bottom-0 right-0 bg-blue-500 p-2 rounded-full cursor-pointer hover:bg-blue-600 transition">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
+              </svg>
+            </label>
+            <input type="file" id="profilePicture" accept="image/*" (change)="onFileSelected($event)" class="hidden" formControlName="profilePicture">
+          </div>
+        </div>
+  
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Full Name</label>
+            <input type="text" formControlName="fullName" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+            <div *ngIf="employeeForm.get('fullName')?.touched && employeeForm.get('fullName')?.invalid" class="text-red-500 text-sm mt-1">
+              <div *ngIf="employeeForm.get('fullName')?.errors?.['required']">Full name is required</div>
+            </div>
+          </div>
+  
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Employee ID</label>
+            <input type="text" formControlName="employeeId" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+            <div *ngIf="employeeForm.get('employeeId')?.touched && employeeForm.get('employeeId')?.invalid" class="text-red-500 text-sm mt-1">
+              <div *ngIf="employeeForm.get('employeeId')?.errors?.['required']">Employee ID is required</div>
+            </div>
+          </div>
+  
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Contact Number</label>
+            <input type="tel" formControlName="contactNumber" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+            <div *ngIf="employeeForm.get('contactNumber')?.touched && employeeForm.get('contactNumber')?.invalid" class="text-red-500 text-sm mt-1">
+              <div *ngIf="employeeForm.get('contactNumber')?.errors?.['required']">Contact number is required</div>
+              <div *ngIf="employeeForm.get('contactNumber')?.errors?.['pattern']">Invalid contact number</div>
+            </div>
+          </div>
+  
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Monthly Sales Target</label>
+            <input type="number" formControlName="monthlyTarget" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+            <div *ngIf="employeeForm.get('monthlyTarget')?.touched && employeeForm.get('monthlyTarget')?.invalid" class="text-red-500 text-sm mt-1">
+              <div *ngIf="employeeForm.get('monthlyTarget')?.errors?.['required']">Monthly target is required</div>
+              <div *ngIf="employeeForm.get('monthlyTarget')?.errors?.['min']">Target must be greater than 0</div>
+            </div>
+          </div>
+  
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Department</label>
+            <select formControlName="department" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+              <option value="">Select Department</option>
+              <option *ngFor="let dept of departments" [value]="dept">{{dept}}</option>
+            </select>
+            <div *ngIf="employeeForm.get('department')?.touched && employeeForm.get('department')?.invalid" class="text-red-500 text-sm mt-1">
+              <div *ngIf="employeeForm.get('department')?.errors?.['required']">Department is required</div>
+            </div>
+          </div>
+  
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Role</label>
+            <select formControlName="role" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+              <option value="">Select Role</option>
+              <option *ngFor="let role of roles" [value]="role">{{role}}</option>
+            </select>
+            <div *ngIf="employeeForm.get('role')?.touched && employeeForm.get('role')?.invalid" class="text-red-500 text-sm mt-1">
+              <div *ngIf="employeeForm.get('role')?.errors?.['required']">Role is required</div>
+            </div>
+          </div>
+        </div>
+  
+        <div class="flex justify-end space-x-4">
+          <button type="button" (click)="resetForm()" class="px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+            Reset
+          </button>
+          <button type="submit" [disabled]="!employeeForm.valid" class="px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:bg-gray-400 disabled:cursor-not-allowed">
+            Save Profile
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
